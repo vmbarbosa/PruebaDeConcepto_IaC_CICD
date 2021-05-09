@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Plantilla principal para POC
+Parameters:
+  Env:
+    Type: String
+    Description: Determina el ambiente de ejecucion
+  BucketTemplates:
+    Type: String
+    Description: Bucket que almacena plantillas de CF
+Resources:
+
+  VPCstack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub >-
+        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/EC2/VPC/VPCstack.yaml
+      Parameters:
+        Env: !Sub >-
+          ${Env}
