@@ -27,3 +27,6 @@ jobs:
         with:
           name: principal-template
           template: Principal.yaml
+          # The parameters to override in the stack inputs. The list is comma-delimited, with each entry formatted as <ParameterName>=<ParameterValue>.
+          parameter-overrides: 
+            Env=dev
