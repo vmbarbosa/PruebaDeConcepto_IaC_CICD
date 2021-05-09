@@ -39,5 +39,5 @@ jobs:
           template: principal_stack.yaml
           # The parameters to override in the stack inputs. The list is comma-delimited, with each entry formatted as <ParameterName>=<ParameterValue>.
           parameter-overrides: 
-            Env=dev
+            Env=dev,
             BucketTemplates=${{ secrets.AWS_BUCKET }}
