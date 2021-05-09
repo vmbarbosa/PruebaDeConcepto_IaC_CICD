@@ -9,11 +9,11 @@ Parameters:
     Description: Bucket que almacena plantillas de CF
 Resources:
 
-  VPC_Stack:
+  VPCStack:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub >-
-        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/VPC_Stack.yaml
+        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/VPCStack.yaml
       Parameters:
         Env: !Sub >-
           ${Env}
