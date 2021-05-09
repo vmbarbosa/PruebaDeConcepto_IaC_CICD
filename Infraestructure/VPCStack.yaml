@@ -6,8 +6,8 @@ Parameters:
     Description: Determina el ambiente de ejecucion
 Resources:
 
-  Prueba:
+  Prueba2:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Sub >-
-        prueba2-${Env}
+        prueba5-${Env}
