@@ -4,10 +4,16 @@ Parameters:
   Env:
     Type: String
     Description: Determina el ambiente de ejecucion
+  BucketTemplates:
+    Type: String
+    Description: Bucket que almacena plantillas de CF
 Resources:
 
-  Prueba:
-    Type: AWS::S3::Bucket
+  VPC_Stack:
+    Type: AWS::CloudFormation::Stack
     Properties:
-      BucketName: !Sub >-
-        prueba2-${Env}
+      TemplateURL: !Sub >-
+        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/VPC_Stack.yaml
+      Parameters:
+        Env: !Sub >-
+          ${Env}
