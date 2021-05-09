@@ -13,7 +13,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub >-
-        https://s3.amazonaws.com/${BucketTemplates}/Repository/VPCstack.yaml
+        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/EC2/VPC/VPCstack.yaml
       Parameters:
         Env: !Sub >-
           ${Env}
