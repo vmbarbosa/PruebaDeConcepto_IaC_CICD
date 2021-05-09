@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: 
+Description: Plantilla principal para POC
 Parameters:
   Env:
     Type: String
