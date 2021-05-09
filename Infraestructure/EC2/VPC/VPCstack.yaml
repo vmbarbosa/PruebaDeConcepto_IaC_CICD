@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Plantilla principal para POC
+Parameters:
+  Env:
+    Type: String
+    Description: Determina el ambiente de ejecucion
+Resources:
+
+  #VPC Principal
+  VPCPrincipal:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: 'false'
+      EnableDnsHostnames: 'false'
+      Tags:
+      - Key: stack
+        Value: dev
+
+  #Public Subnet 01
+  PublicSub01:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPCPrincipal
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      CidrBlock: 10.0.1.0/24
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub Public_Subnet_01_${Env}
+
+  #Public Subnet 02
+  PublicSub02:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPCPrincipal
+      AvailabilityZone: !Select [1, !GetAZs ""]
+      CidrBlock: 10.0.2.0/24
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub Public_Subnet_02_${Env}
+
+  #Private Subnet 01
+  PrivateSub01:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPCPrincipal
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      CidrBlock: 10.0.3.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: Private_Subnet_01_${Env}
+
+  #Private Subnet 02
+  PrivateSub02:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPCPrincipal
+      AvailabilityZone: !Select [1, !GetAZs ""]
+      CidrBlock: 10.0.4.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: Private_Subnet_02_${Env}
