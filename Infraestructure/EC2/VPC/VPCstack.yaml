@@ -1,10 +1,10 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: Template EC2 Instance Public for VPC
+Description: Template for VPC Services
 Parameters:
   Env:
     Type: String
     Description: Determina el ambiente de ejecucion
-Conditions: #Para condicionar 
+Conditions: 
   CreateProd: !Equals [!Ref Env, prod]
   CreateDev: !Equals [!Ref Env, dev]
   DontCreateProd: !Not [!Equals [!Ref Env, prod]]
