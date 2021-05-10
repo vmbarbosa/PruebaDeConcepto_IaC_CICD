@@ -28,6 +28,7 @@ Resources:
       Monitoring: true
     DependsOn:
       - SecurityGroupEC2PublicInstance
+
   
   # Elastic IP Addres for EC2 Public Instance
   ElasticIPAddForPublicInstance:
