@@ -14,8 +14,10 @@ Resources:
       EnableDnsSupport: 'false'
       EnableDnsHostnames: 'false'
       Tags:
-      - Key: stack
-        Value: dev
+        - Key: stack
+          Value: dev
+        - Key: Name
+          Value: VPC_Principal_${Env}
 
   #Public Subnet 01
   PublicSub01:

@@ -17,3 +17,6 @@ Resources:
       Parameters:
         Env: !Sub >-
           ${Env}
+
+  EC2Instancestack:
+    
