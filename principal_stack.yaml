@@ -56,6 +56,6 @@ Resources:
       Parameters:
         Env: !Sub >-
           ${Env}
-        SubPublic: !GetAtt [VPCstack, Outputs.PrivateSubnet02]
+        SubPrivate: !GetAtt [VPCstack, Outputs.PrivateSubnet02]
     DependsOn:
       - VPCstack
