@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: Plantilla principal para POC
+Description: Template EC2 Instance Public for VPC
 Parameters:
   Env:
     Type: String
@@ -66,3 +66,11 @@ Resources:
       Tags:
         - Key: Name
           Value: Private_Subnet_02_${Env}
+
+Outputs: 
+  PublicSubnet01:
+    Description: Output for Public Subnet 01 
+    Value: !Ref PublicSub01
+    Export:
+      Name: PublicSubnet01
+

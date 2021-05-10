@@ -19,4 +19,12 @@ Resources:
           ${Env}
 
   EC2Instancestack:
-    
+    Properties:
+      TemplateURL: !Sub >-
+        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/EC2/Instance/InstancePublicstack.yaml
+      Parameters:
+        Env: !Sub >-
+          ${Env}
+        SubPublic01: !GetAtt [VPCstack, Outputs.PublicSubnet01]
+    DependsOn:
+      - VPCstack

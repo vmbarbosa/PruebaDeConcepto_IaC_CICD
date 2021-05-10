@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: Plantilla EC2 Instance para POC
+Description: Template EC2 Instance Public for POC
 Parameters:
   Env:
     Type: String
