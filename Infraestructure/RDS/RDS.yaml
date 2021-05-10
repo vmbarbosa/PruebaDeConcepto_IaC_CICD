@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: Template EC2 Instance Private for POC
+Description: Template for RDS Services
 Parameters:
   Env:
     Type: String
