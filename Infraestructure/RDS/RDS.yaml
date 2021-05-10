@@ -8,14 +8,23 @@ Parameters:
     Type: String
   SubPrivate02:
     Type: String
+  PasswordRDSCluster:
+    NoEcho: 'true'
+    Description: Password for PostgreSQL database access
+    Type: String
+    MinLength: '8'
+    MaxLength: '41'
+    AllowedPattern: '[a-zA-Z0-9]*'
+    ConstraintDescription: must contain only alphanumeric characters.
 Resources:
 
   RDSCluster:
     Type: 'AWS::RDS::DBCluster'
     DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
     Properties:
       MasterUsername: 'Victormbarbosa'
-      MasterUserPassword: 'tbdjCduh8jy'
+      MasterUserPassword: !Ref PasswordRDSCluster
       DBClusterIdentifier: !Sub DBCluster-serverless-${Env}
       Engine: aurora-postgresql
       EngineMode: serverless
@@ -25,12 +34,11 @@ Resources:
         MaxCapacity: 32
         SecondsUntilAutoPause: 1000
       DBSubnetGroupName: !Ref DBSubnetGroup
-    DependsOn:
-      - DBSubnetGroup
 
   DBSubnetGroup:
     Type: "AWS::RDS::DBSubnetGroup"
     DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
     Properties: 
       DBSubnetGroupDescription: DBSubnetGroup para base de datos de Serverless de prueba
       SubnetIds: 
@@ -38,4 +46,4 @@ Resources:
         - !Ref SubPrivate02
       Tags: 
         - Key: Name
-          Value: !Sub DBSubnetGroup_${Env}
+          Value: !Sub DBSubnetGroup-${Env}

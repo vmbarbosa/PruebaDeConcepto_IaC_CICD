@@ -7,6 +7,14 @@ Parameters:
   BucketTemplates:
     Type: String
     Description: Bucket que almacena plantillas de CF
+  PasswordRDSCluster:
+    NoEcho: 'true'
+    Description: Password for PostgreSQL database access
+    Type: String
+    MinLength: '8'
+    MaxLength: '41'
+    AllowedPattern: '[a-zA-Z0-9]*'
+    ConstraintDescription: must contain only alphanumeric characters.
 Resources:
 
   # Stack VPC 
@@ -14,49 +22,44 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub >-
-        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/EC2/VPC/VPCstack.yaml
+        https://s3.amazonaws.com/${BucketTemplates}/Repository/Infraestructure/EC2/VPC/VPCstack.yaml
       Parameters:
         Env: !Sub >-
           ${Env}
 
-  # Stack EC2 Public Instances
+  # Stack EC2 Public Instances 
   EC2PublicInstancestack:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub >-
-        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/EC2/Instance/InstancePublicstack.yaml
+        https://s3.amazonaws.com/${BucketTemplates}/Repository/Infraestructure/EC2/Instance/InstancePublicstack.yaml
       Parameters:
         Env: !Sub >-
           ${Env}
         SubPublic: !GetAtt [VPCstack, Outputs.PublicSubnet01]
         VPC: !GetAtt [VPCstack, Outputs.VPCid]
-    DependsOn:
-      - VPCstack
   
   # Stack EC2 Private Instances
   EC2PrivateInstancestack:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub >-
-        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/EC2/Instance/InstancePrivatestack.yaml
+        https://s3.amazonaws.com/${BucketTemplates}/Repository/Infraestructure/EC2/Instance/InstancePrivatestack.yaml
       Parameters:
         Env: !Sub >-
           ${Env}
         SubPrivate: !GetAtt [VPCstack, Outputs.PrivateSubnet01]
         VPC: !GetAtt [VPCstack, Outputs.VPCid]
-    DependsOn:
-      - VPCstack
   
   # Stack RDS Services
   RDS:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub >-
-        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/RDS/RDS.yaml
+        https://s3.amazonaws.com/${BucketTemplates}/Repository/Infraestructure/RDS/RDS.yaml
       Parameters:
         Env: !Sub >-
           ${Env}
         SubPrivate01: !GetAtt [VPCstack, Outputs.PrivateSubnet01]
         SubPrivate02: !GetAtt [VPCstack, Outputs.PrivateSubnet02]
-    DependsOn:
-      - VPCstack
+        PasswordRDSCluster: !Ref PasswordRDSCluster

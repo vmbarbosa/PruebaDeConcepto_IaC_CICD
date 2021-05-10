@@ -19,6 +19,12 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2.2.2
 
+      - name: Linter Cloudformation Templates
+        run: |  
+          pip install cfn-lint
+          cfn-lint principal_stack.yaml
+          cfn-lint Infraestructure/**/*.yaml
+
       - name: Move directories and files of templates
         run: |
           mkdir Templates
@@ -34,13 +40,18 @@ jobs:
   deploy-dev:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request'}}
+    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged == false }}
     steps:
+
+      - name: Create directory for Artifact
+        run: |
+          mkdir Templates
 
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.9
         with:
           name: Build_CF_Templates
+          path: Templates
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -55,15 +66,57 @@ jobs:
           aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
           aws_bucket: ${{ secrets.AWS_BUCKET }}
-          source_dir: 'Infraestructure/'
-          destination_dir: 'Infraestructure/'
+          source_dir: 'Templates/'
+          destination_dir: 'Repository/'
           
       - name: Deploy CloudFormation Stack
         uses: aws-actions/aws-cloudformation-github-deploy@v1.0.3
         with:
-          name: principal-template
-          template: principal_stack.yaml
-          # The parameters to override in the stack inputs. The list is comma-delimited, with each entry formatted as <ParameterName>=<ParameterValue>.
+          name: principal-template-dev
+          template: Templates/principal_stack.yaml
           parameter-overrides: 
             Env=dev,
-            BucketTemplates=${{ secrets.AWS_BUCKET }}
+            BucketTemplates=${{ secrets.AWS_BUCKET }},
+            PasswordRDSCluster=${{ secrets.AWS_PASSWORD_DBCLUSTER }}
+  
+  deploy-prod:
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true }}
+    steps:
+
+      - name: Create directory for Artifact
+        run: |
+          mkdir Templates
+
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v2.0.9
+        with:
+          name: Build_CF_Templates
+          path: Templates
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Upload Templates to S3 
+        uses: shallwefootball/s3-upload-action@master
+        with:
+          aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_bucket: ${{ secrets.AWS_BUCKET }}
+          source_dir: 'Templates/'
+          destination_dir: 'Repository/'
+          
+      - name: Deploy CloudFormation Stack
+        uses: aws-actions/aws-cloudformation-github-deploy@v1.0.3
+        with:
+          name: principal-template-prod
+          template: Templates/principal_stack.yaml
+          parameter-overrides: 
+            Env=prod,
+            BucketTemplates=${{ secrets.AWS_BUCKET }},
+            PasswordRDSCluster=${{ secrets.AWS_PASSWORD_DBCLUSTER }}
