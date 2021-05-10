@@ -82,4 +82,4 @@ Deberás construir una prueba de concepto (POC) con la solución diseñada para 
 
 ## Contact
 
-* [Victor Barbosa](https://github.com/vmbarbosa) | victormp2@gmail.com | +57 3008346619 
+* [Victor Barbosa](https://github.com/vmbarbosa) | victormp2@gmail.com | [Linkedin](https://www.linkedin.com/in/victormbarbosa/)
