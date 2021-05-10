@@ -19,8 +19,8 @@ Resources:
           ${Env}
 
   EC2Instancestack:
-    Properties:
     Type: AWS::CloudFormation::Stack
+    Properties:
       TemplateURL: !Sub >-
         https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/EC2/Instance/InstancePublicstack.yaml
       Parameters:
