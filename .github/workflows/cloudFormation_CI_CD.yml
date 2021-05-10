@@ -19,10 +19,27 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2.2.2
 
+      - name: Move directories and files of templates
+        run: |
+          mkdir Templates
+          mv Infraestructure Templates
+          cp principal_stack.yaml Templates
+        
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.3
+        with:
+          name: Build_CF_Templates
+          path: Templates
+
   deploy-dev:
     needs: build
     runs-on: ubuntu-latest
     steps:
+
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v2.0.9
+        with:
+          name: Build_CF_Templates
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
