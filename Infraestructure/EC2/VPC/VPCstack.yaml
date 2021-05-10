@@ -89,7 +89,7 @@ Resources:
     Type: AWS::EC2::NatGateway
     Properties:
       AllocationId: !GetAtt NatGatewayEIPVPCPrincipal.AllocationId
-      SubnetId: !Ref PublicSubnet1
+      SubnetId: !Ref PublicSub01
 
   # Route Table to private subnet 
   PrivateRouteTabVPCPrincipal:
@@ -121,13 +121,6 @@ Resources:
     Properties:
       RouteTableId: !Ref PrivateRouteTabVPCPrincipal
       SubnetId: !Ref PrivateSub02
-  
-  #Associate Private Route Table to Private Subnet 03
-  PrivateSub03RouteTabAssociate:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      RouteTableId: !Ref PrivateRouteTabVPCPrincipal
-      SubnetId: !Ref PrivateSub03
 
   # Private Subnet 01
   PrivateSub01:
@@ -152,18 +145,6 @@ Resources:
       Tags:
         - Key: Name
           Value: Private_Subnet_02_${Env}
-  
-  # Private Subnet 03
-  PrivateSub03:
-    Type: AWS::EC2::Subnet
-    Properties:
-      VpcId: !Ref VPCPrincipal
-      AvailabilityZone: !Select [1, !GetAZs ""]
-      CidrBlock: 10.0.4.0/24
-      MapPublicIpOnLaunch: false
-      Tags:
-        - Key: Name
-          Value: Private_Subnet_03_${Env}
 
 Outputs: 
 
@@ -184,12 +165,6 @@ Outputs:
     Value: !Ref PrivateSub02
     Export:
       Name: PrivateSubnet02
-
-  PrivateSubnet03:
-    Description: Output for Private Subnet 03 
-    Value: !Ref PrivateSub03
-    Export:
-      Name: PrivateSubnet03
   
   VPCid:
     Description: Output for VPC ID 
