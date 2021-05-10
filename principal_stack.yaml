@@ -30,8 +30,6 @@ Resources:
           ${Env}
         SubPublic: !GetAtt [VPCstack, Outputs.PublicSubnet01]
         VPC: !GetAtt [VPCstack, Outputs.VPCid]
-    DependsOn:
-      - VPCstack
   
   # Stack EC2 Private Instances
   EC2PrivateInstancestack:
@@ -44,8 +42,6 @@ Resources:
           ${Env}
         SubPrivate: !GetAtt [VPCstack, Outputs.PrivateSubnet01]
         VPC: !GetAtt [VPCstack, Outputs.VPCid]
-    DependsOn:
-      - VPCstack
   
   # Stack RDS Services
   RDS:
@@ -58,5 +54,3 @@ Resources:
           ${Env}
         SubPrivate01: !GetAtt [VPCstack, Outputs.PrivateSubnet01]
         SubPrivate02: !GetAtt [VPCstack, Outputs.PrivateSubnet02]
-    DependsOn:
-      - VPCstack
