@@ -40,6 +40,18 @@ Deberás construir una prueba de concepto (POC) con la solución diseñada para 
 ### Principal Stack
 ![image](https://drive.google.com/uc?export=view&id=14z_I67eBcfYXDxNgoGiNspKdM8QYx2oA)
 
+### VPC Stack
+![image](https://drive.google.com/uc?export=view&id=1zsJp1QzNq9vVYZTpydSifdHj3bCgaFL4)
+
+### EC2 Public Instance Stack
+![image](https://drive.google.com/uc?export=view&id=1Id5m1Vly0ZAC0kIKaczcqpiGxoYFClMm)
+
+### EC2 Private Instance Stack
+![image](https://drive.google.com/uc?export=view&id=1h4I-iHKjgQvVD1lpKvVTkyPMffPQDz1w)
+
+### RDS Stack
+![image](https://drive.google.com/uc?export=view&id=1-caHUDlAIDZz6l30XSf8w3fs2UQpc8du)
+
 ## Contact
 
 * [Victor Barbosa](https://github.com/vmbarbosa) | victormp2@gmail.com | +57 3008346619 
