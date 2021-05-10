@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Template EC2 Instance Private for POC
+Parameters:
+  Env:
+    Type: String
+    Description: Determina el ambiente de ejecucion
+  SubPrivate01:
+    Type: String
+  SubPrivate02:
+    Type: String
+Resources:
+
+  RDSCluster:
+    Type: 'AWS::RDS::DBCluster'
+    DeletionPolicy: Retain
+    Properties:
+      MasterUsername: 'Victormbarbosa'
+      MasterUserPassword: 'tbdjCduh8jy'
+      DBClusterIdentifier: !Sub DBCluster-serverless-${Env}
+      Engine: aurora-postgresql
+      EngineMode: serverless
+      ScalingConfiguration:
+        AutoPause: true
+        MinCapacity: 4
+        MaxCapacity: 32
+        SecondsUntilAutoPause: 1000
+      DBSubnetGroupName: !Ref DBSubnetGroup
+    DependsOn:
+      - DBSubnetGroup
+
+  DBSubnetGroup:
+    Type: "AWS::RDS::DBSubnetGroup"
+    DeletionPolicy: Retain
+    Properties: 
+      DBSubnetGroupDescription: DBSubnetGroup para base de datos de Serverless de prueba
+      SubnetIds: 
+        - !Ref SubPrivate01
+        - !Ref SubPrivate02
+      Tags: 
+        - Key: Name
+          Value: !Sub DBSubnetGroup_${Env}
