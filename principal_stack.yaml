@@ -18,15 +18,28 @@ Resources:
         Env: !Sub >-
           ${Env}
 
-  EC2Instancestack:
+  # EC2Instancestack:
+  #   Type: AWS::CloudFormation::Stack
+  #   Properties:
+  #     TemplateURL: !Sub >-
+  #       https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/EC2/Instance/InstancePublicstack.yaml
+  #     Parameters:
+  #       Env: !Sub >-
+  #         ${Env}
+  #       SubPublic: !GetAtt [VPCstack, Outputs.PublicSubnet01]
+  #       VPC: !GetAtt [VPCstack, Outputs.VPCid]
+  #   DependsOn:
+  #     - VPCstack
+  
+  EC2PrivateInstancestack:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub >-
-        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/EC2/Instance/InstancePublicstack.yaml
+        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/EC2/Instance/InstancePrivatestack.yaml
       Parameters:
         Env: !Sub >-
           ${Env}
-        SubPublic: !GetAtt [VPCstack, Outputs.PublicSubnet01]
+        SubPrivate: !GetAtt [VPCstack, Outputs.PrivateSubnet01]
         VPC: !GetAtt [VPCstack, Outputs.VPCid]
     DependsOn:
       - VPCstack
