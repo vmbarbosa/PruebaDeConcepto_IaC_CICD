@@ -9,6 +9,7 @@ Parameters:
     Description: Bucket que almacena plantillas de CF
 Resources:
 
+  # Stack VPC 
   VPCstack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -18,6 +19,7 @@ Resources:
         Env: !Sub >-
           ${Env}
 
+  # Stack EC2 Public Instances
   EC2PublicInstancestack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -31,6 +33,7 @@ Resources:
     DependsOn:
       - VPCstack
   
+  # Stack EC2 Private Instances
   EC2PrivateInstancestack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -44,6 +47,7 @@ Resources:
     DependsOn:
       - VPCstack
   
+  # Stack RDS Services
   RDS:
     Type: AWS::CloudFormation::Stack
     Properties:
