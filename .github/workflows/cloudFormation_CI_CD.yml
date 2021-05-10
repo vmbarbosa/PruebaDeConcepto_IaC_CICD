@@ -76,7 +76,7 @@ jobs:
           template: Templates/principal_stack.yaml
           parameter-overrides: 
             Env=dev,
-            BucketTemplates=${{ secrets.AWS_BUCKET }}
+            BucketTemplates=${{ secrets.AWS_BUCKET }},
             PasswordRDSCluster=${{ secrets.AWS_PASSWORD_DBCLUSTER }}
   
   deploy-prod:
@@ -118,4 +118,5 @@ jobs:
           template: Templates/principal_stack.yaml
           parameter-overrides: 
             Env=prod,
-            BucketTemplates=${{ secrets.AWS_BUCKET }}
+            BucketTemplates=${{ secrets.AWS_BUCKET }},
+            PasswordRDSCluster=${{ secrets.AWS_PASSWORD_DBCLUSTER }}
