@@ -9,6 +9,7 @@ Parameters:
     Description: Bucket que almacena plantillas de CF
   PasswordRDSCluster:
     Type: String
+    NoEcho: true
 Resources:
 
   # Stack VPC 

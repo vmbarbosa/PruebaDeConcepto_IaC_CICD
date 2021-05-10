@@ -10,6 +10,7 @@ Parameters:
     Type: String
   PasswordRDSCluster:
     Tpye: String
+    NoEcho: true
 Resources:
 
   RDSCluster:
