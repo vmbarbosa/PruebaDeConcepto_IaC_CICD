@@ -43,3 +43,15 @@ Resources:
         VPC: !GetAtt [VPCstack, Outputs.VPCid]
     DependsOn:
       - VPCstack
+  
+  RDS:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub >-
+        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/RDS/RDS.yaml
+      Parameters:
+        Env: !Sub >-
+          ${Env}
+        SubPublic: !GetAtt [VPCstack, Outputs.PublicSubnet02]
+    DependsOn:
+      - VPCstack
