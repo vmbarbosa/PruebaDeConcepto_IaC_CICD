@@ -77,7 +77,7 @@ Outputs:
   
   VPCid:
     Description: Output for VPC ID 
-    Value: !Ref VPC
+    Value: !Ref VPCPrincipal
     Export:
       Name: VPCid
 
