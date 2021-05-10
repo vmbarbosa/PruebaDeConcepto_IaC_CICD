@@ -40,4 +40,4 @@ Resources:
       Tags: 
         - 
           Key: String
-          Value: DBSubnetGroup-${Env}
+          Value: DBSubnetGroup_${Env}
