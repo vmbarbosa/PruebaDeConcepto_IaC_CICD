@@ -8,7 +8,6 @@ Parameters:
     Type: String
 Resources:
 
-
   # ----------------------------------- EC2 Public Instance --------------------------------
 
   # EC2 Public Instance
@@ -31,7 +30,6 @@ Resources:
   
   # Elastic IP Addres for EC2 Public Instance
   ElasticIPAddForPublicInstance:
-    Condition: DontCreateProdResources
     Type: AWS::EC2::EIP
 
   # EIPAssociation for Elastic IP of EC2PublicInstance
