@@ -4,7 +4,9 @@ Parameters:
   Env:
     Type: String
     Description: Determina el ambiente de ejecucion
-  SubPrivate:
+  SubPrivate01:
+    Type: String
+  SubPrivate02:
     Type: String
 Resources:
 
@@ -33,7 +35,8 @@ Resources:
     Properties: 
       DBSubnetGroupDescription: DBSubnetGroup para base de datos de Serverless de prueba
       SubnetIds: 
-        - !Ref SubPrivate
+        - !Ref SubPrivate01
+        - !Ref SubPrivate02
       Tags: 
         - 
           Key: String
