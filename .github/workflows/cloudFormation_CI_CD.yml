@@ -34,6 +34,7 @@ jobs:
   deploy-dev:
     needs: build
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request'}}
     steps:
 
       - name: Download a Build Artifact
