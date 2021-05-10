@@ -11,6 +11,7 @@ Parameters:
 Conditions: 
   CreateProd: !Equals [!Ref Env, prod]
   CreateDev: !Equals [!Ref Env, dev]
+  CreateTest: !Equals [!Ref Env, test]
   DontCreateProd: !Not [!Equals [!Ref Env, prod]]
 Resources:
 
