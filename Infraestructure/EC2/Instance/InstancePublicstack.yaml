@@ -24,7 +24,7 @@ Resources:
       KeyName: publicInstance
       Tags:
         - Key: Name
-          Value: !Join ["-", [!Ref Env, Public-Instance]]
+          Value: !Join ["-", [!Ref Env, Public-Instance-01]]
       Monitoring: true
     DependsOn:
       - SecurityGroupEC2PublicInstance
