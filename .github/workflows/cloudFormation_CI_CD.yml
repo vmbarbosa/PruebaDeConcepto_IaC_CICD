@@ -19,6 +19,12 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2.2.2
 
+      - name: Linter Cloudformation Templates
+        run: |  
+          pip install cfn-lint
+          cfn-lint principal_stack.yaml
+          cfn-lint Infraestructure/**/*.yaml
+
       - name: Move directories and files of templates
         run: |
           mkdir Templates
@@ -34,7 +40,7 @@ jobs:
   deploy-dev:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged == false }}
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == false }}
     steps:
 
       - name: Create directory for Artifact
