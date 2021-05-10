@@ -11,6 +11,7 @@ Parameters:
 Conditions: 
   CreateProd: !Equals [!Ref Env, prod]
   CreateDev: !Equals [!Ref Env, dev]
+  CreateTest: !Equals [!Ref Env, test]
   DontCreateProd: !Not [!Equals [!Ref Env, prod]]
 Resources:
 
@@ -20,7 +21,7 @@ Resources:
   EC2PublicInstance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: !If [ CreateProd ,"ami-077e31c4939f6a2f3", "ami-0d5eff06f840b45e9",] 
+      ImageId: !If [ CreateProd ,"ami-077e31c4939f6a2f3", !If [ CreateTest ,"ami-0cf6f5c8a62fa5da6","ami-0d5eff06f840b45e9",] ]
       InstanceType: t2.micro
       SecurityGroupIds:
         - !Ref SecurityGroupEC2PublicInstance
