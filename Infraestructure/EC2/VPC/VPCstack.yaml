@@ -16,7 +16,7 @@ Resources:
   VPCPrincipal:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: !If [ CreateProd ,192.0.0.0/24 , 10.0.0.0/16,] 
+      CidrBlock: !If [ CreateProd ,172.31.0.0/16 , 10.0.0.0/16,] 
       EnableDnsSupport: 'false'
       EnableDnsHostnames: 'false'
       Tags:
@@ -73,7 +73,7 @@ Resources:
     Properties:
       VpcId: !Ref VPCPrincipal
       AvailabilityZone: !Select [0, !GetAZs ""]
-      CidrBlock: !If [ CreateProd , 192.0.1.0/24 , 10.0.1.0/24,] 
+      CidrBlock: !If [ CreateProd , 172.31.1.0/24 , 10.0.1.0/24,] 
       MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
@@ -132,7 +132,7 @@ Resources:
     Properties:
       VpcId: !Ref VPCPrincipal
       AvailabilityZone: !Select [0, !GetAZs ""]
-      CidrBlock: !If [ CreateProd , 192.0.2.0/24 , 10.0.2.0/24,] 
+      CidrBlock: !If [ CreateProd , 172.31.2.0/24 , 10.0.2.0/24,] 
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
@@ -144,7 +144,7 @@ Resources:
     Properties:
       VpcId: !Ref VPCPrincipal
       AvailabilityZone: !Select [1, !GetAZs ""]
-      CidrBlock: !If [ CreateProd , 192.0.3.0/24 , 10.0.3.0/24,] 
+      CidrBlock: !If [ CreateProd , 172.31.3.0/24 , 10.0.3.0/24,] 
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
