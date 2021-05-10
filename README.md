@@ -15,7 +15,7 @@
     <li>
       <a href="#requirements">Requirements</a>
       <ul>
-        <li><a href="#extra points">Extra points</a></li>
+        <li><a href="#extra-points">Extra points</a></li>
       </ul>
     </li>
     <li><a href="#solution">Solution</a>
