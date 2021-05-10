@@ -59,9 +59,9 @@ Deberás construir una prueba de concepto (POC) con la solución diseñada para 
 
 ### Technologies
 
-* **Pipeline Tool:** *Github Actions*
-* **Cloud:** *Amazon Web Services (AWS)*
-* **Infraestructure As Code:** *AWS Cloudformation Templates*
+**Pipeline Tool:** *Github Actions*
+**Cloud:** *Amazon Web Services (AWS)*
+**Infraestructure As Code:** *AWS Cloudformation Templates*
 
 ### Diagrams
 
@@ -82,4 +82,4 @@ Deberás construir una prueba de concepto (POC) con la solución diseñada para 
 
 ## Contact
 
-* [Victor Barbosa](https://github.com/vmbarbosa) | victormp2@gmail.com | [Linkedin](https://www.linkedin.com/in/victormbarbosa/)
+[Victor Barbosa](https://github.com/vmbarbosa) | victormp2@gmail.com | [Linkedin](https://www.linkedin.com/in/victormbarbosa/)
