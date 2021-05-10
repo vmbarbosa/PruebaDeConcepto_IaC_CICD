@@ -27,7 +27,7 @@ Resources:
         Env: !Sub >-
           ${Env}
 
-  # Stack EC2 Public Instances
+  # Stack EC2 Public Instances 
   EC2PublicInstancestack:
     Type: AWS::CloudFormation::Stack
     Properties:
