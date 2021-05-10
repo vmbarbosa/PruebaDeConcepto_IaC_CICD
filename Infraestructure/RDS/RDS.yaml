@@ -25,7 +25,7 @@ Resources:
         MinCapacity: 4
         MaxCapacity: 32
         SecondsUntilAutoPause: 1000
-        DBSubnetGroupName: !Ref DBSubnetGroup
+      DBSubnetGroupName: !Ref DBSubnetGroup
     DependsOn:
       - DBSubnetGroup
 
