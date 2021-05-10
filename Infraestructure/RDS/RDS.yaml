@@ -38,4 +38,4 @@ Resources:
         - !Ref SubPrivate02
       Tags: 
         - Key: Name
-          Value: !Sub DBSubnetGroup_${Env}
+          Value: !Sub DBSubnetGroup-${Env}

@@ -34,7 +34,7 @@ jobs:
   deploy-dev:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push'}}
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'open' && github.event.pull_request.merged == false }}
     steps:
 
       - name: Create directory for Artifact
@@ -61,7 +61,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
           aws_bucket: ${{ secrets.AWS_BUCKET }}
           source_dir: 'Templates/'
-          destination_dir: '/'
+          destination_dir: 'Repository/'
           
       - name: Deploy CloudFormation Stack
         uses: aws-actions/aws-cloudformation-github-deploy@v1.0.3
@@ -75,7 +75,7 @@ jobs:
   deploy-prod:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request'}}
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true }}
     steps:
 
       - name: Create directory for Artifact
@@ -102,7 +102,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
           aws_bucket: ${{ secrets.AWS_BUCKET }}
           source_dir: 'Templates/'
-          destination_dir: '/'
+          destination_dir: 'Repository/'
           
       - name: Deploy CloudFormation Stack
         uses: aws-actions/aws-cloudformation-github-deploy@v1.0.3
