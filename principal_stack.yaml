@@ -14,7 +14,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub >-
-        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/EC2/VPC/VPCstack.yaml
+        https://s3.amazonaws.com/${BucketTemplates}/Repository/Infraestructure/EC2/VPC/VPCstack.yaml
       Parameters:
         Env: !Sub >-
           ${Env}
@@ -24,7 +24,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub >-
-        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/EC2/Instance/InstancePublicstack.yaml
+        https://s3.amazonaws.com/${BucketTemplates/Repository/Infraestructure/EC2/Instance/InstancePublicstack.yaml
       Parameters:
         Env: !Sub >-
           ${Env}
@@ -38,7 +38,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub >-
-        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/EC2/Instance/InstancePrivatestack.yaml
+        https://s3.amazonaws.com/${BucketTemplates}/Repository/Infraestructure/EC2/Instance/InstancePrivatestack.yaml
       Parameters:
         Env: !Sub >-
           ${Env}
@@ -52,7 +52,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub >-
-        https://s3.amazonaws.com/${BucketTemplates}/Infraestructure/RDS/RDS.yaml
+        https://s3.amazonaws.com/${BucketTemplates}/Repository/Infraestructure/RDS/RDS.yaml
       Parameters:
         Env: !Sub >-
           ${Env}
