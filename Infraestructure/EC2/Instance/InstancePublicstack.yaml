@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Template EC2 Instance Public for POC
+Parameters:
+  Env:
+    Type: String
+    Description: Determina el ambiente de ejecucion
+  SubPublic:
+    Type: String
+  VPC:
+    Type: String
+Resources:
+
+  # ----------------------------------- EC2 Public Instance --------------------------------
+
+  # EC2 Public Instance
+  EC2PublicInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: "ami-0d5eff06f840b45e9"
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !Ref SecurityGroupEC2PublicInstance
+      SubnetId: !Ref SubPublic
+      KeyName: publicInstance
+      Tags:
+        - Key: Name
+          Value: !Join ["-", [!Ref Env, Public-Instance]]
+      Monitoring: true
+    DependsOn:
+      - SecurityGroupEC2PublicInstance
+
+  
+  # Elastic IP Addres for EC2 Public Instance
+  ElasticIPAddForPublicInstance:
+    Type: AWS::EC2::EIP
+
+  # EIPAssociation for Elastic IP of EC2PublicInstance
+  EIPAssociationForPublicInstance:
+    Type: AWS::EC2::EIPAssociation
+    Properties:
+      InstanceId: !Ref EC2PublicInstance
+      EIP: !Ref ElasticIPAddForPublicInstance
+    DependsOn:
+      - EC2PublicInstance
+      - ElasticIPAddForPublicInstance
+
+  # Security Group for EC2PublicInstance
+  SecurityGroupEC2PublicInstance:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupName: !Join ["-", [!Ref Env, SecurityGroupEC2PublicInstance]]
+      GroupDescription: !Join ["-", [!Ref Env, SecurityGroupEC2PublicInstance]]
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: "-1"
+          Description: All Ingrees access
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: "-1"
+          Description: All Egrees access
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: !Join ["-", [!Ref Env, EC2 Public Instance]]

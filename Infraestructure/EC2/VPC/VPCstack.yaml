@@ -1,10 +1,12 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: Plantilla principal para POC
+Description: Template EC2 Instance Public for VPC
 Parameters:
   Env:
     Type: String
     Description: Determina el ambiente de ejecucion
 Resources:
+
+  # ------------------------------ VPC Configuration ------------------------------
 
   #VPC Principal
   VPCPrincipal:
@@ -14,8 +16,52 @@ Resources:
       EnableDnsSupport: 'false'
       EnableDnsHostnames: 'false'
       Tags:
-      - Key: stack
-        Value: dev
+        - Key: stack
+          Value: dev
+        - Key: Name
+          Value: VPC_Principal_${Env}
+
+  # ------------- Public Network Configuration -------------
+
+  # Internet Gateway 
+  IntGatewayVPCPrincipal:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Join ["_", ["IntGateway_VPCPrincipal", !Ref Env]]
+
+  #Attach IGW to VPCPrincipal
+  IntGatewayAttachVPCPrincipal:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref IntGatewayVPCPrincipal
+      VpcId: !Ref VPCPrincipal
+
+  # Route Table for public Subnets 
+  PublicRouteTabVPCPrincipal:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPCPrincipal
+      Tags:
+        - Key: Name
+          Value: !Sub ${Env} - Public Route Table VPCPrincipal 
+
+  # Public Route to redirect traffic from Internet to IntGatewayVPCPrincipal
+  PublicRouteVPCPrincipal:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicRouteTabVPCPrincipal
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref IntGatewayVPCPrincipal
+    DependsOn: IntGatewayAttachVPCPrincipal
+
+  #Associate Public Route Table to Public Subnet 01
+  PublicSub01RouteTabAssociate:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTabVPCPrincipal
+      SubnetId: !Ref PublicSub01
 
   #Public Subnet 01
   PublicSub01:
@@ -29,38 +75,100 @@ Resources:
         - Key: Name
           Value: !Sub Public_Subnet_01_${Env}
 
-  #Public Subnet 02
-  PublicSub02:
-    Type: AWS::EC2::Subnet
+  # ------------- Private Network Configuration -------------
+
+  # Elastic  IP to el Nat Gateway
+  NatGatewayEIPVPCPrincipal:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+    DependsOn: IntGatewayAttachVPCPrincipal
+
+  # Nat Gateway to private subnet 
+  NatGatewayVPCPrincipal:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt NatGatewayEIPVPCPrincipal.AllocationId
+      SubnetId: !Ref PublicSub01
+
+  # Route Table to private subnet 
+  PrivateRouteTabVPCPrincipal:
+    Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref VPCPrincipal
-      AvailabilityZone: !Select [1, !GetAZs ""]
-      CidrBlock: 10.0.2.0/24
-      MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
-          Value: !Sub Public_Subnet_02_${Env}
+          Value: !Sub ${Env} - Private Route Table VPCPrincipal 
 
-  #Private Subnet 01
+  # Private Route to redirect traffic from Internet to NatGatewayVPCPrincipal
+  PrivateRouteVPCPrincipal:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTabVPCPrincipal
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NatGatewayVPCPrincipal
+  
+  #Associate Private Route Table to Private Subnet 01
+  PrivateSub01RouteTabAssociate:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTabVPCPrincipal
+      SubnetId: !Ref PrivateSub01
+
+  #Associate Private Route Table to Private Subnet 02
+  PrivateSub02RouteTabAssociate:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTabVPCPrincipal
+      SubnetId: !Ref PrivateSub02
+
+  # Private Subnet 01
   PrivateSub01:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPCPrincipal
       AvailabilityZone: !Select [0, !GetAZs ""]
-      CidrBlock: 10.0.3.0/24
+      CidrBlock: 10.0.2.0/24
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
           Value: Private_Subnet_01_${Env}
 
-  #Private Subnet 02
+  # Private Subnet 02
   PrivateSub02:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPCPrincipal
       AvailabilityZone: !Select [1, !GetAZs ""]
-      CidrBlock: 10.0.4.0/24
+      CidrBlock: 10.0.3.0/24
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
           Value: Private_Subnet_02_${Env}
+
+Outputs: 
+
+  PublicSubnet01:
+    Description: Output for Public Subnet 01 
+    Value: !Ref PublicSub01
+    Export:
+      Name: PublicSubnet01
+
+  PrivateSubnet01:
+    Description: Output for Private Subnet 01 
+    Value: !Ref PrivateSub01
+    Export:
+      Name: PrivateSubnet01
+
+  PrivateSubnet02:
+    Description: Output for Private Subnet 02
+    Value: !Ref PrivateSub02
+    Export:
+      Name: PrivateSubnet02
+  
+  VPCid:
+    Description: Output for VPC ID 
+    Value: !Ref VPCPrincipal
+    Export:
+      Name: VPCid
+
