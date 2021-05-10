@@ -15,7 +15,7 @@ Resources:
     DeletionPolicy: Retain
     Properties:
       MasterUsername: 'Victormbarbosa'
-      MasterUserPassword: 'tbd<jC?duh/?)8jy'
+      MasterUserPassword: 'tbdjCduh8jy'
       DBClusterIdentifier: !Sub DBCluster-serverless-${Env}
       Engine: aurora-postgresql
       EngineMode: serverless
