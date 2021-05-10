@@ -4,7 +4,7 @@ Parameters:
   Env:
     Type: String
     Description: Determina el ambiente de ejecucion
-  SubPublic01:
+  SubPublic:
     Type: String
   VPC:
     Type: String
