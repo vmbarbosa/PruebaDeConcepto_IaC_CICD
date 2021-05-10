@@ -8,7 +8,13 @@ Parameters:
     Type: String
     Description: Bucket que almacena plantillas de CF
   PasswordRDSCluster:
-    NoEcho: true
+    NoEcho: 'true'
+    Description: Password for PostgreSQL database access
+    Type: String
+    MinLength: '8'
+    MaxLength: '41'
+    AllowedPattern: '[a-zA-Z0-9]*'
+    ConstraintDescription: must contain only alphanumeric characters.
 Resources:
 
   # Stack VPC 
