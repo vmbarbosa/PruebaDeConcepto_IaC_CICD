@@ -25,6 +25,9 @@ Resources:
         - Key: Name
           Value: !Join ["-", [!Ref Env, Public-Instance]]
       Monitoring: true
+    DependsOn:
+      - SecurityGroupEC2PublicInstance
+      - EIPAssociationForPublicInstance
   
   # Elastic IP Addres for EC2 Public Instance
   ElasticIPAddForPublicInstance:
