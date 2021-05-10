@@ -106,7 +106,7 @@ jobs:
         with:
           aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_bucket: ${{ secrets.AWS_BUCKET }}
+          aws_bucket: ${{ secrets.AWS_BUCKET_TEST }}
           source_dir: 'Templates/'
           destination_dir: 'Repository/'
           
@@ -117,7 +117,7 @@ jobs:
           template: Templates/principal_stack.yaml
           parameter-overrides: 
             Env=test,
-            BucketTemplates=${{ secrets.AWS_BUCKET }},
+            BucketTemplates=${{ secrets.AWS_BUCKET_TEST }},
             PasswordRDSCluster=${{ secrets.AWS_PASSWORD_DBCLUSTER }}
   
   deploy-prod:
@@ -148,7 +148,7 @@ jobs:
         with:
           aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_bucket: ${{ secrets.AWS_BUCKET }}
+          aws_bucket: ${{ secrets.AWS_BUCKET_PROD }}
           source_dir: 'Templates/'
           destination_dir: 'Repository/'
           
@@ -159,5 +159,5 @@ jobs:
           template: Templates/principal_stack.yaml
           parameter-overrides: 
             Env=prod,
-            BucketTemplates=${{ secrets.AWS_BUCKET }},
+            BucketTemplates=${{ secrets.AWS_BUCKET_PROD }},
             PasswordRDSCluster=${{ secrets.AWS_PASSWORD_DBCLUSTER }}
