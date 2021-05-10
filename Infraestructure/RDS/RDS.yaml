@@ -34,8 +34,6 @@ Resources:
         MaxCapacity: 32
         SecondsUntilAutoPause: 1000
       DBSubnetGroupName: !Ref DBSubnetGroup
-    DependsOn:
-      - DBSubnetGroup
 
   DBSubnetGroup:
     Type: "AWS::RDS::DBSubnetGroup"
