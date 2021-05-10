@@ -8,7 +8,6 @@ Parameters:
     Type: String
     Description: Bucket que almacena plantillas de CF
   PasswordRDSCluster:
-    Type: String
     NoEcho: true
 Resources:
 

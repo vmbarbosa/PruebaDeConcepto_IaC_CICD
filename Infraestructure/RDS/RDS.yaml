@@ -9,13 +9,13 @@ Parameters:
   SubPrivate02:
     Type: String
   PasswordRDSCluster:
-    Tpye: String
     NoEcho: true
 Resources:
 
   RDSCluster:
     Type: 'AWS::RDS::DBCluster'
     DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
     Properties:
       MasterUsername: 'Victormbarbosa'
       MasterUserPassword: !Ref PasswordRDSCluster

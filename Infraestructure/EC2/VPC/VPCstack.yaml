@@ -136,7 +136,7 @@ Resources:
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
-          Value: Private_Subnet_01_${Env}
+          Value: !Sub Private_Subnet_01_${Env}
 
   # Private Subnet 02
   PrivateSub02:
@@ -148,7 +148,7 @@ Resources:
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
-          Value: Private_Subnet_02_${Env}
+          Value: !Sub Private_Subnet_02_${Env}
 
 Outputs: 
 
