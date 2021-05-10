@@ -14,8 +14,16 @@
     </li>
     <li>
       <a href="#requirements">Requirements</a>
+      <ul>
+        <li><a href="#extra points">Extra points</a></li>
+      </ul>
     </li>
-    <li><a href="#solution">Solution</a></li>
+    <li><a href="#solution">Solution</a>
+      <ul>
+        <li><a href="#technologies">Technologies</a></li>
+        <li><a href="#diagrams">Diagrams</a></li>
+      </ul>
+    </li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -53,7 +61,7 @@ Deberás construir una prueba de concepto (POC) con la solución diseñada para 
 
 * **Pipeline Tool:** *Github Actions*
 * **Cloud:** *Amazon Web Services (AWS)*
-* **Infraestructure As a Code:** *AWS Cloudformation Templates*
+* **Infraestructure As Code:** *AWS Cloudformation Templates*
 
 ### Diagrams
 
