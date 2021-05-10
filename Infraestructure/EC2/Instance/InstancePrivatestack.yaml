@@ -8,6 +8,10 @@ Parameters:
     Type: String
   VPC:
     Type: String
+Conditions: 
+  CreateProd: !Equals [!Ref Env, prod]
+  CreateDev: !Equals [!Ref Env, dev]
+  DontCreateProd: !Not [!Equals [!Ref Env, prod]]
 Resources:
 
   # ----------------------------------- EC2 Private Instance --------------------------------
@@ -16,7 +20,7 @@ Resources:
   EC2PrivateInstance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: "ami-0d5eff06f840b45e9"
+      ImageId: !If [ CreateProd ,"ami-077e31c4939f6a2f3", "ami-0d5eff06f840b45e9",] 
       InstanceType: t2.micro
       SecurityGroupIds:
         - !Ref SecurityGroupEC2PrivateInstance
