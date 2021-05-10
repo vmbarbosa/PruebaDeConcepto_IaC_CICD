@@ -16,7 +16,7 @@ Resources:
   EC2PublicInstance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: "ami-09d19e919d57453f8"
+      ImageId: "ami-0d5eff06f840b45e9"
       InstanceType: t2.micro
       SecurityGroupIds:
         - !Ref SecurityGroupEC2PublicInstance
