@@ -39,6 +39,7 @@ Deberás construir una prueba de concepto (POC) con la solución diseñada para 
 
 ### Principal Stack
 ![image](https://drive.google.com/uc?export=view&id=14z_I67eBcfYXDxNgoGiNspKdM8QYx2oA)
+<a href="https://drive.google.com/uc?export=view&id=14z_I67eBcfYXDxNgoGiNspKdM8QYx2oA"><img src="https://drive.google.com/uc?export=view&id=14z_I67eBcfYXDxNgoGiNspKdM8QYx2oA" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
 
 ### VPC Stack
 ![image](https://drive.google.com/uc?export=view&id=1zsJp1QzNq9vVYZTpydSifdHj3bCgaFL4)
