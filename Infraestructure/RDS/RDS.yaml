@@ -16,7 +16,7 @@ Resources:
     Properties:
       MasterUsername: 'Victormbarbosa'
       MasterUserPassword: 'tbd<jC?duh/?)8jy'
-      DBClusterIdentifier: DBCluster-serverless-${Env}
+      DBClusterIdentifier: !Sub DBCluster-serverless-${Env}
       Engine: aurora-postgresql
       EngineVersion: 5.6.10a
       EngineMode: serverless
