@@ -82,7 +82,7 @@ jobs:
   deploy-prod:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' &&  github.event.review.state == 'approved' }}
+    if: ${{ github.event_name == 'push' }}
     steps:
 
       - name: Create directory for Artifact
