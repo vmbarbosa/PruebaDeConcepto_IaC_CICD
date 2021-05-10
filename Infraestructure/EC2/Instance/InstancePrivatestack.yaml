@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Template EC2 Instance Private for POC
+Parameters:
+  Env:
+    Type: String
+    Description: Determina el ambiente de ejecucion
+  SubPrivate:
+    Type: String
+  VPC:
+    Type: String
+Resources:
+
+  # ----------------------------------- EC2 Private Instance --------------------------------
+
+  # EC2 Private Instance
+  EC2PrivateInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: "ami-0d5eff06f840b45e9"
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !Ref SecurityGroupEC2PrivateInstance
+      SubnetId: !Ref SubPrivate
+      KeyName: publicInstance
+      Tags:
+        - Key: Name
+          Value: !Join ["-", [!Ref Env, Private-Instance]]
+      Monitoring: true
+    DependsOn:
+      - SecurityGroupEC2PrivateInstance
+
+  # Security Group for EC2PrivateInstance
+  SecurityGroupEC2PrivateInstance:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupName: !Join ["-", [!Ref Env, SecurityGroupEC2PrivateInstance]]
+      GroupDescription: !Join ["-", [!Ref Env, SecurityGroupEC2PrivateInstance]]
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Join ["-", [!Ref Env, EC2 Private Instance]]
