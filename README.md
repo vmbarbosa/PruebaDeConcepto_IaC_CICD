@@ -13,7 +13,7 @@
       <a href="#about-the-project">About The Project</a>
     </li>
     <li>
-      <a href="#getting-started">Instructions</a>
+      <a href="#instructions">Instructions</a>
     </li>
     <li><a href="#contact">Contact</a></li>
   </ol>
