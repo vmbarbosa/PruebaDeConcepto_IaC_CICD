@@ -13,9 +13,9 @@
       <a href="#about-the-project">About The Project</a>
     </li>
     <li>
-      <a href="#instructions">Instructions</a>
+      <a href="#requirements">Requirements</a>
     </li>
-    <li><a href="#diagrams">Diagrams</a></li>
+    <li><a href="#solution">Solution</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -26,8 +26,20 @@ El área de operaciones de una compañía requiere construir un modelo de Automa
 
 Deberás construir una prueba de concepto (POC) con la solución diseñada para que el equipo pueda decidir.
 
-## Instructions:
+## Requirements:
 
+* Pasos definidos y su explicación.
+
+* Buenas prácticas en la POC, todos los pipelines o pipeline como código.
+
+* Buenas prácticas en la herramienta seleccionada para "infra as code".
+
+* Buen uso del repositorio de código fuente.
+
+* Creación de un video explicativo (no gastar mucho tiempo en la edición).
+
+
+### Extra points
   * [x] Hacer la POC para una arquitectura montada sobre AWS
   * [x] Una VPC AWS
   * [x] Tres Subnets.
@@ -35,21 +47,29 @@ Deberás construir una prueba de concepto (POC) con la solución diseñada para 
   * [x] Una máquina EC2 sobre la subnet pública 
   * [x] Una RDS sobre la otra subnet privada
 
-## Diagrams
+## Solution
 
-### Principal Stack
+### Technologies
+
+* **Pipeline Tool:** *Github Actions*
+* **Cloud:** *Amazon Web Services (AWS)*
+* **Infraestructure As a Code:** *AWS Cloudformation Templates*
+
+### Diagrams
+
+#### Principal Stack
 * Link image: https://drive.google.com/uc?export=view&id=14z_I67eBcfYXDxNgoGiNspKdM8QYx2oA
 
-### VPC Stack
+#### VPC Stack
 * Link image: https://drive.google.com/uc?export=view&id=1zsJp1QzNq9vVYZTpydSifdHj3bCgaFL4
 
-### EC2 Public Instance Stack
+#### EC2 Public Instance Stack
 * Link image: https://drive.google.com/uc?export=view&id=1Id5m1Vly0ZAC0kIKaczcqpiGxoYFClMm
 
-### EC2 Private Instance Stack
+#### EC2 Private Instance Stack
 * Link image: https://drive.google.com/uc?export=view&id=1h4I-iHKjgQvVD1lpKvVTkyPMffPQDz1w
 
-### RDS Stack
+#### RDS Stack
 * Link image: https://drive.google.com/uc?export=view&id=1-caHUDlAIDZz6l30XSf8w3fs2UQpc8du
 
 ## Contact
