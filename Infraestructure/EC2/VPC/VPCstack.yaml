@@ -68,9 +68,16 @@ Resources:
           Value: Private_Subnet_02_${Env}
 
 Outputs: 
+
   PublicSubnet01:
     Description: Output for Public Subnet 01 
     Value: !Ref PublicSub01
     Export:
       Name: PublicSubnet01
+  
+  VPCid:
+    Description: Output for VPC ID 
+    Value: !Ref VPC
+    Export:
+      Name: VPCid
 

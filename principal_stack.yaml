@@ -27,5 +27,6 @@ Resources:
         Env: !Sub >-
           ${Env}
         SubPublic01: !GetAtt [VPCstack, Outputs.PublicSubnet01]
+        VPC: !GetAtt [VPCstack, Outputs.VPCid]
     DependsOn:
       - VPCstack

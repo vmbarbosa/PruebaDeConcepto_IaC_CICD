@@ -6,6 +6,8 @@ Parameters:
     Description: Determina el ambiente de ejecucion
   SubPublic01:
     Type: String
+  VPC:
+    Type: String
 Resources:
 
   # ----------------------------------- EC2 Public Instance --------------------------------
@@ -45,7 +47,7 @@ Resources:
     Properties:
       GroupName: !Join ["-", [!Ref Env, SecurityGroupEC2PublicInstance]]
       GroupDescription: !Join ["-", [!Ref Env, SecurityGroupEC2PublicInstance]]
-      VpcId: !Ref VPCId
+      VpcId: !Ref VPC
       SecurityGroupIngress:
         - IpProtocol: "-1"
           Description: All Ingrees access
