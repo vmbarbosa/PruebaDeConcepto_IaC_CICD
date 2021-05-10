@@ -7,6 +7,8 @@ Parameters:
   BucketTemplates:
     Type: String
     Description: Bucket que almacena plantillas de CF
+  PasswordRDSCluster:
+    Type: String
 Resources:
 
   # Stack VPC 
@@ -54,3 +56,4 @@ Resources:
           ${Env}
         SubPrivate01: !GetAtt [VPCstack, Outputs.PrivateSubnet01]
         SubPrivate02: !GetAtt [VPCstack, Outputs.PrivateSubnet02]
+        PasswordRDSCluster: !Ref PasswordRDSCluster
