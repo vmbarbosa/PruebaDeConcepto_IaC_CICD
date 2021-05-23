@@ -1,9 +1,9 @@
 # PruebaDeConcepto_IaC_CICD
 
-![GitHub contributors](https://img.shields.io/github/contributors/vmbarbosa/FinalProjectFrotendCourse?style=flat-square)
-![GitHub Languages](https://img.shields.io/github/languages/count/vmbarbosa/FinalProjectFrotendCourse?style=flat-square)
-![GitHub Pull Request](https://img.shields.io/github/issues-pr/vmbarbosa/FinalProjectFrotendCourse?style=flat-square)
-![GitHub Commit Activity](https://img.shields.io/github/commit-activity/w/vmbarbosa/FinalProjectFrotendCourse?style=flat-square)
+![GitHub contributors](https://img.shields.io/github/contributors/vmbarbosa/PruebaDeConcepto_IaC_CICD?style=flat-square)
+![GitHub Languages](https://img.shields.io/github/languages/count/vmbarbosa/PruebaDeConcepto_IaC_CICD?style=flat-square)
+![GitHub Pull Request](https://img.shields.io/github/issues-pr/vmbarbosa/PruebaDeConcepto_IaC_CICD?style=flat-square)
+![GitHub Commit Activity](https://img.shields.io/github/commit-activity/w/vmbarbosa/PruebaDeConcepto_IaC_CICD?style=flat-square)
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
